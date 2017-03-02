@@ -1,0 +1,2 @@
+Note:
+  Microbial GA (tournament) converges slower than task 1 and 2 with low population.
