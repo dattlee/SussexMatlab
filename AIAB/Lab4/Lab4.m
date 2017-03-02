@@ -35,7 +35,7 @@ save('Lab4_task1_solutions.mat','task1solutions');
 % % %   Task 2
 % % %
 
-local = 5
+local = 5;
 [winner,winnerInd,fitRec,popGens] = Task2(B,V,maxVol,pop,gen,local);
 
 x = linspace(1,gen,gen);
@@ -47,3 +47,23 @@ maxIndex = sortIndex(1:4);                             %   descending order retr
 task2solutions = popGens(maxIndex,:)
 
 save('Lab4_task2_solutions.mat','task2solutions');
+
+
+
+% % %
+% % %   Task 3
+% % %
+
+local = 5;
+cross = 0.5;
+[winner,winnerInd,fitRec,popGens] = Task3(B,V,maxVol,pop,gen,local,cross);
+
+x = linspace(1,gen,gen);
+figure(3);plot(x,fitRec');
+
+[sortedValues,sortIndex] = sort(fitRec(:,end),'descend');  % Sort the values in
+maxIndex = sortIndex(1:4);                             %   descending order retrun top 4 indices
+
+task3solutions = popGens(maxIndex,:)
+
+save('Lab4_task3_solutions.mat','task3solutions');

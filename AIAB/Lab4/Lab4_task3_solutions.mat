@@ -1,0 +1,11 @@
+# Created by Octave 4.2.0, Thu Mar 02 02:48:45 2017 GMT <Dattlee@Davids-MacBook-Pro.local>
+# name: task3solutions
+# type: matrix
+# rows: 4
+# columns: 20
+ 0 1 0 0 1 1 0 0 0 1 0 0 0 0 1 1 1 0 1 0
+ 0 1 0 0 1 0 0 0 1 1 0 0 0 0 1 1 1 0 1 0
+ 0 1 0 0 1 0 0 0 1 1 0 0 0 0 1 1 1 0 1 0
+ 0 1 0 0 1 0 0 0 0 1 1 0 0 1 1 1 1 0 1 0
+
+
