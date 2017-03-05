@@ -7,15 +7,14 @@ B = [6    19     7     1    13    17     3    18    16    20     5    15    12  
 V = [10     5    15    18     1    17    12    19    16     4     9    20    13     7     3     2     6    11     8    14];
 
 
-gen = 2000; % number of generations / number of matchups
-maxVol = 50; % maximum volume
+gen = 1000; % number of generations / number of matchups
 pop = 100; % population size
 
 % % %
 % % %   Task 1
 % % %
 
-[winner,winnerInd,fitRec,popGens] = Task1(B,V,maxVol,pop,gen);
+[winner,winnerInd,fitRec,popGens] = Task1(B,V,Max_Volume,pop,gen);
 
 x = linspace(1,gen,gen);
 figure(1);plot(x,fitRec');
@@ -36,7 +35,7 @@ save('Lab4_task1_solutions.mat','task1solutions');
 % % %
 
 local = 5;
-[winner,winnerInd,fitRec,popGens] = Task2(B,V,maxVol,pop,gen,local);
+[winner,winnerInd,fitRec,popGens] = Task2(B,V,Max_Volume,pop,gen,local);
 
 x = linspace(1,gen,gen);
 figure(2);plot(x,fitRec');
@@ -56,7 +55,7 @@ save('Lab4_task2_solutions.mat','task2solutions');
 
 local = 5;
 cross = 0.5;
-[winner,winnerInd,fitRec,popGens] = Task3(B,V,maxVol,pop,gen,local,cross);
+[winner,winnerInd,fitRec,popGens] = Task3(B,V,Max_Volume,pop,gen,local,cross);
 
 x = linspace(1,gen,gen);
 figure(3);plot(x,fitRec');
