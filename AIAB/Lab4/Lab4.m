@@ -53,6 +53,7 @@ save('Lab4_task2_solutions.mat','task2solutions');
 % % %   Task 3
 % % %
 
+gen = 10000
 local = 5;
 cross = 0.5;
 [winner,winnerInd,fitRec,popGens] = Task3(B,V,Max_Volume,pop,gen,local,cross);

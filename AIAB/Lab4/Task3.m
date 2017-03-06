@@ -28,7 +28,7 @@ function [winner,winnerInd,fitRec,popGens] = Task3(B,V,maxVol,pop,gen,local,cros
     %Fitness Function mark 2
     popVol = popGens*V';
     legal = popVol<=maxVol;
-    popFits = ((popGens*B').*legal) - ((popGens*B')-maxVol).*(1-legal);
+    popFits = ((popGens*B').*legal) - ((popGens*V')-maxVol).*(1-legal);
 
 
     mutRate = 1/length(B);  % mutation rate ** Low enough so that on average
@@ -78,7 +78,7 @@ function [winner,winnerInd,fitRec,popGens] = Task3(B,V,maxVol,pop,gen,local,cros
         %Fitness Function mark 2
         popVol(l) = popGens(l,:)*V';
         legal = popVol(l)<=maxVol;
-        popFits(l) = (popGens(l,:)*B'.*legal) - ((popGens(l,:)*B')-maxVol).*(1-legal);
+        popFits(l) = (popGens(l,:)*B'.*legal) - ((popGens(l,:)*V')-maxVol).*(1-legal);
 
         % Update fitness record
         fitRec(:,g) = popFits;
