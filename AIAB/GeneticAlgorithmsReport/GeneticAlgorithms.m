@@ -15,9 +15,9 @@ V = [  6     8     5    10     8     6     7    14    11     9    14     6    12
 
 %%% Hillclimber GA
 pop = 100; % Population size
-gen = 20000; % No. Generations
+gen = 100; % No. Generations
 generate = 0; % 1, to randomly generate population genomes, 0 to set to nothing
-mut = 10;
+mut = 1;
 
 fitRec = hillClimber(B,V,pop,gen,MAX_VOLUME,generate,mut);
 
@@ -29,7 +29,7 @@ title('Hill Climber GA Fitness Record');
 ylabel('Fitness');
 xlabel('Number of generations');
 hold off;
-print -dpng 'HillClimberFitness.png'
+print -dpng 'HillClimberFitness.png'; % Usually returns a max of 306
 
 
 
@@ -41,6 +41,7 @@ mut = 1; % Mutation proportion 1 would be 1/length(B)
 local = 5;
 cross = 0.5;
 [winner,winnerInd,fitRecMicrobial,popGens] = microbial(B,V,pop,gen,MAX_VOLUME,generate,mut,local,cross);
+% Retruns a max of 818
 
 x = linspace(1,gen,gen);
 figure(2);plot(x,fitRecMicrobial');
@@ -50,7 +51,7 @@ ylabel('Fitness');
 xlabel('Number of generations');
 hold off;
 MICROBIAL_MAX = max(fitRecMicrobial)
-print -dpng 'MicrobialFitness.png'
+print -dpng 'MicrobialFitness.png';
 
 
 % Save solutions for top 4 in population
