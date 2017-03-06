@@ -19,9 +19,16 @@ function [winner,winnerInd,fitRec,popGens] = Task3(B,V,maxVol,pop,gen,local,cros
 % IF THE VOLUME WAS TOO LARGE THEN WHEN THE ALGORITHM WAS USED TO SCALE
 
     % [popFits, popVols] = fitness(maxVol,B,V,popGens);
-    popVols = popGens*V';
-    legal = (popVols<=maxVol)*2-1;
-    popFits = popGens*B'.*legal;
+
+    % Fitness function mark 1
+    % popVols = popGens*V';
+    % legal = (popVols<=maxVol)*2-1;
+    % popFits = popGens*B'.*legal;
+
+    %Fitness Function mark 2
+    popVol = popGens*V';
+    legal = popVol<=maxVol;
+    popFits = ((popGens*B').*legal) - ((popGens*B')-maxVol).*(1-legal);
 
 
     mutRate = 1/length(B);  % mutation rate ** Low enough so that on average
@@ -62,9 +69,16 @@ function [winner,winnerInd,fitRec,popGens] = Task3(B,V,maxVol,pop,gen,local,cros
 
         %[popVol(l),popFits(l)] = fitness(maxVol, B, V,popGens(l,:))
         % Fitness function failed
+
+        % Fitness function mark 1
+        % popVol(l) = popGens(l,:)*V';
+        % legal = (popVol(l)<=maxVol)*2-1;
+        % popFits(l) = popGens(l,:)*B'.*legal;
+
+        %Fitness Function mark 2
         popVol(l) = popGens(l,:)*V';
-        legal = (popVol(l)<=maxVol)*2-1;
-        popFits(l) = popGens(l,:)*B'.*legal;
+        legal = popVol(l)<=maxVol;
+        popFits(l) = (popGens(l,:)*B'.*legal) - ((popGens(l,:)*B')-maxVol).*(1-legal);
 
         % Update fitness record
         fitRec(:,g) = popFits;
