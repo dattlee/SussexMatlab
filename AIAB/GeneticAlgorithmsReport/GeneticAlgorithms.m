@@ -1,8 +1,8 @@
 % % % 
 % % % The Items
 % % % 
-
-%%% Small Number of genes
+% 
+% %%% Small Number of genes
 % MAX_VOLUME = 20; 
 % B = [5 6 1 9 2 8 4 3 7 10]; % Benefits
 % V = [3 2 4 5 8 9 10 1 6 7]; % Volumes
@@ -15,8 +15,8 @@ V = [  6     8     5    10     8     6     7    14    11     9    14     6    12
 
 %%% Hillclimber GA
 pop = 100; % Population size
-gen = 100; % No. Generations
-generate = 0; % 1, to randomly generate population genomes, 0 to set to nothing
+gen = 100000; % No. Generations
+generate = 1; % 1, to randomly generate population genomes, 0 to set to nothing
 mut = 1;
 
 fitRec = hillClimber(B,V,pop,gen,MAX_VOLUME,generate,mut);
@@ -25,18 +25,16 @@ x = linspace(1,gen,gen);
 HILLCLIMBER_MAX = max(fitRec)
 figure(1);plot(x,fitRec'); % ,[0 x],ones(gen+1,1)*HILLCLIMBER_MAX);
 hold on;
-title('Hill Climber GA Fitness Record');
+title(sprintf('Hill Climber GA Fitness Record: Initialised Genomes\nGenome Size %d, Population Size %d',length(B),pop));
 ylabel('Fitness');
 xlabel('Number of generations');
 hold off;
-print -dpng 'HillClimberFitness.png'; % Usually returns a max of 306
-
-
+%print -dpng 'HillClimberFitness.png'; % Usually returns a max of 306
+hillFile = sprintf('HillclimberFitnessIG%dP%dM%d',length(B),pop,HILLCLIMBER_MAX);
+print(hillFile,'-dpng')
 
 %%% Microbial GA
-pop = 100; % Population size
-gen = 50000; % No. of tournaments
-generate = 1;  % 1, to randomly generate population genomes, 0 to set to nothing
+gen = 100000;
 mut = 1; % Mutation proportion 1 would be 1/length(B)
 local = 5;
 cross = 0.5;
@@ -46,13 +44,13 @@ cross = 0.5;
 x = linspace(1,gen,gen);
 figure(2);plot(x,fitRecMicrobial');
 hold on;
-title('Microbial GA Fitness Record');
+title(sprintf('Microbial GA Fitness Record: Ininitialised Genomes\nGenome Size %d, Population Size %d',length(B),pop));
 ylabel('Fitness');
-xlabel('Number of generations');
+xlabel('Number of tournaments');
 hold off;
 MICROBIAL_MAX = max(fitRecMicrobial)
-print -dpng 'MicrobialFitness.png';
-
+microbialFile = sprintf('MicrobialFitnessIG%dP%dM%d',length(B),pop,MICROBIAL_MAX);
+print(microbialFile,'-dpng')
 
 % Save solutions for top 4 in population
 populationFits = popGens*B';
