@@ -112,6 +112,9 @@ for i=1:num_neg_examples
     activation = this_case*w;
     if (activation >= 0)
         %YOUR CODE HERE
+        % if the activation positively classifiys an output:
+        % WeightChange  = LearningRate * Input * Target-Output 
+        w = w + (1 * x * (-1));
     end
 end
 for i=1:num_pos_examples
@@ -120,6 +123,7 @@ for i=1:num_pos_examples
     activation = this_case*w;
     if (activation < 0)
         %YOUR CODE HERE
+        w = w + (1 * x * (1));
     end
 end
 
