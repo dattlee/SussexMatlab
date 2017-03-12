@@ -77,7 +77,7 @@ hold off
 %computation by choosing a greater number of ieration of the update of the
 %weights.
 
-nb_iter=1;
+nb_iter=10000;
 eta = 1;
 
 for iter = 1:nb_iter
@@ -91,6 +91,8 @@ for iter = 1:nb_iter
         %How do you compute the output?
         Output(i)=g(V*Inter);%to remove
        
+        
+        
         %Now you need to compute the Delta and the delta values that you
         %will be able to find within the lecture notes. However you need to
         %be careful with the notations.
