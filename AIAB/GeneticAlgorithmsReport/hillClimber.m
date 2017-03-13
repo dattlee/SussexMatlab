@@ -26,7 +26,7 @@ function fitRec = hillClimber(B,V,pop,gen,MAX_VOLUME,generate,mut)
         
         % Randomly mutate one offspring allele
         for gt = 1:pop % For each genotype in population
-            r = randi(10,1,mut);
+            r = randi(length(B),1,mut);
             tempGens(gt, r) = ~tempGens(gt, r);
         end
         
@@ -36,6 +36,7 @@ function fitRec = hillClimber(B,V,pop,gen,MAX_VOLUME,generate,mut)
         % For each parent ofspring pair, if the offspring is fitter
         % overwrite the parent
         for b = 1:pop
+            better(b);
             if better(b)
                 popGens(b,:) = tempGens(b,:);
                 popFits(b) = tempFits(b);
