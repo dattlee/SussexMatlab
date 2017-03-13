@@ -30,3 +30,19 @@ scatter(X2,X5,[],Y)
 % scatter(X3,X4,[],Y)
 % scatter(X3,X5,[],Y)
 % scatter(X4,X5,[],Y)
+
+
+
+%% Initialize weights
+noInputs = length(X(1,:));
+layer1 = 6 % Number of nodes in 1st hidden layer
+output = 1 % No nodes in output layer
+w1 = ones(layer1,noInputs) % Initilaize weights of first hidden layer
+w2 = ones(output,layer1)*2 % Initilaize weights of last hidden layer
+
+w(1,:) = w(1,:) *2 % test: multiply 1 set of weights by 2
+
+a = x(1,:)' %
+b = w1 * a
+c = w2 * b
+
