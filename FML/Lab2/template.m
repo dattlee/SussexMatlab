@@ -12,7 +12,7 @@ x=rand(100,1);
 y=zeros(1,length(x));
 for i = 1:length(x)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    y(i) =  0;%to complete
+    y(i) = 0.6 + sin(2*pi*x(i))/4 + cos(4*pi*x(i))/4;%to complete
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end
 
@@ -21,7 +21,9 @@ end
 %distribution centered in 0 and of standard deviation 0.1. Use the randn()
 %function
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-y =  y;%to complete
+
+% Standard normal distribution is 1, so divide by 40
+y = y + randn(size(y))/40;%to complete
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 figure(1)
@@ -43,31 +45,33 @@ scatter(x,y)
 %V is a matrix of size (3,1).
 
 
-nb_state=3;
-U = rand(nb_state,2);
-V = rand(1,nb_state);
+nb_state=3; % The number of nodes in the hidden layer
+U = rand(nb_state,2); % weights in the first layer
+V = rand(1,nb_state);   % weights in the second layer
 
 % Initialisation of empty matrices
-Inter=zeros(nb_state,1);
-Output=zeros(length(x),1);
-Err=zeros(length(x),1);
+Inter=zeros(nb_state,1);    % Hidden layer nodes
+Output=zeros(length(x),1);  % Output nodes the result of the forward pass
+                            % after inputting every input x
+Err=zeros(length(x),1);     % the error between the target output and x
 
 %You now need to implement the forward step. The sigmoid has already been 
 %chosen. It is the g function.
 for i = 1:length(x)
-    Input=[1,x(i)];
+    Input=[1,x(i)]; % The bias of 1 and the input x
     %What is the intermediary vector?
-    for j = 1:nb_state
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        Inter(j)= 0;%to complete
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    end
+%     for j = 1:nb_state
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         Inter(j) = 0;%to complete
+%         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     end
+    Inter = g(U * Input');
     
     %How do you compute the output?
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    Output(i)= 0;%to complete
+%     Output(i)= 0;%to complete
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
+    Output(i) = g(V * Inter);
     %Expression of the error:
     Err(i)=(Output(i)-y(i))^2;
 end
@@ -92,17 +96,10 @@ eta = 1;
 for iter = 1:nb_iter
     for i = 1:length(x)
         Input=[1,x(i)];
-        %What is the intermediary vector?
-        for j = 1:nb_state
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            Inter(j)= 0;%to complete
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        end
-        %How do you compute the output?
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        Output(i)= 0;%to complete
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        Inter = g(U * Input');
+        Output(i) = g(V * Inter);
 
+        
         %Now you need to compute the Delta and the delta values that you
         %will be able to find within the lecture notes. However you need to
         %be careful with the notations.
