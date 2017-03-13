@@ -1,0 +1,2 @@
+init_sim
+run_sim
