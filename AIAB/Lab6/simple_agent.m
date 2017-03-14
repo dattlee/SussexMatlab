@@ -1,4 +1,4 @@
-function [pos] = simple_agent(T,pos,bearing,geno,plot_flag)
+[pos] = simple_agent(T,pos,bearing,geno,plot_flag)
 %runs a simple agent described by a geno and returns the trajectory
 %the light is at [0 0]
 
