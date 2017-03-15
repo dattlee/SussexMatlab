@@ -19,6 +19,15 @@ grad = zeros(size(theta));
 
 
 
+z = X*theta;
+ho = sigmoid(z);
+
+J = ((-y'*log(ho)-(1-y)'*log(1-ho))/m) + (lambda*sum(theta(2:end).^2)/(2*m));
+
+grad(1) = (X(:,1)'*(ho-y))/m;
+grad(2:end) = (X(:,2:end)'*(ho-y) + lambda*theta(2:end))/m;
+
+
 
 
 
