@@ -13,11 +13,19 @@ figure; hold on;
 %
 
 
+pos = find(y ==1); neg = find(y==0);
+plot(X(pos,1),X(pos,2),'r+');
+hold on;
+plot(X(neg,1),X(neg,2),'bo');
 
+title('Students admitted to college');
 
+% Labels and Legend
+xlabel('Exam 1 score')
+ylabel('Exam 2 score')
 
-
-
+% Add a legend/key
+legend('Admitted', 'Not admitted')
 
 
 % =========================================================================

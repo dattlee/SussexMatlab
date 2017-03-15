@@ -20,7 +20,15 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+% Z Hypothesis
+z = X*theta;
 
+% Apply Sigmoid Function
+ho = sigmoid(z);
+
+J = (-y'*log(ho)-(1-y)'*log(1-ho))/m;
+
+grad = X'*(ho-y)/m;
 
 
 

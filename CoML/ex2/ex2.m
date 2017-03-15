@@ -33,20 +33,11 @@ X = data(:, [1, 2]); y = data(:, 3);
 fprintf(['Plotting data with + indicating (y = 1) examples and o ' ...
          'indicating (y = 0) examples.\n']);
 
-plotData(X, y);
 
-% Put some labels 
-hold on;
-% Labels and Legend
-xlabel('Exam 1 score')
-ylabel('Exam 2 score')
+plotData(X,y);
 
-% Specified in plot order
-legend('Admitted', 'Not admitted')
-hold off;
-
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+% fprintf('\nProgram paused. Press enter to continue.\n');
+% pause;
 
 
 %% ============ Part 2: Compute Cost and Gradient ============
@@ -81,9 +72,9 @@ fprintf('Expected cost (approx): 0.218\n');
 fprintf('Gradient at test theta: \n');
 fprintf(' %f \n', grad);
 fprintf('Expected gradients (approx):\n 0.043\n 2.566\n 2.647\n');
-
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+ 
+% fprintf('\nProgram paused. Press enter to continue.\n');
+% pause;
 
 
 %% ============= Part 3: Optimizing using fminunc  =============
@@ -119,8 +110,8 @@ ylabel('Exam 2 score')
 legend('Admitted', 'Not admitted')
 hold off;
 
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+% fprintf('\nProgram paused. Press enter to continue.\n');
+% pause;
 
 %% ============== Part 4: Predict and Accuracies ==============
 %  After learning the parameters, you'll like to use it to predict the outcomes

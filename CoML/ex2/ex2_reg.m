@@ -73,10 +73,10 @@ fprintf('Gradient at initial theta (zeros) - first five values only:\n');
 fprintf(' %f \n', grad(1:5));
 fprintf('Expected gradients (approx) - first five values only:\n');
 fprintf(' 0.0085\n 0.0188\n 0.0001\n 0.0503\n 0.0115\n');
-
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
-
+% % % 
+% % % fprintf('\nProgram paused. Press enter to continue.\n');
+% % % pause;
+% % % 
 % Compute and display cost and gradient with non-zero theta
 test_theta = ones(size(X,2),1);
 [cost, grad] = costFunctionReg(test_theta, X, y, lambda);
@@ -87,10 +87,10 @@ fprintf('Gradient at test theta - first five values only:\n');
 fprintf(' %f \n', grad(1:5));
 fprintf('Expected gradients (approx) - first five values only:\n');
 fprintf(' 0.3460\n 0.0851\n 0.1185\n 0.1506\n 0.0159\n');
-
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
-
+% % % 
+% % % fprintf('\nProgram paused. Press enter to continue.\n');
+% % % pause;
+% % % 
 %% ============= Part 2: Regularization and Accuracies =============
 %  Optional Exercise:
 %  In this part, you will get to try different values of lambda and 
