@@ -77,7 +77,7 @@ hold off
 %computation by choosing a greater number of ieration of the update of the
 %weights.
 
-nb_iter=10000;
+nb_iter=10;
 eta = 1;
 
 for iter = 1:nb_iter
