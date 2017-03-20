@@ -6,15 +6,31 @@ data = csvread('data133610.csv');
 X = data(:,1:5);
 Y = data(:,6);
 
+% e = eig(X)
+fprintf('\nData imported. Program paused, press enter to continue\n');
+pause;
 %% Assess Data
 X1 = X(:,1); % Gaussian
 X2 = X(:,2); % Guassian
 X3 = X(:,3); % Uniform
 X4 = X(:,4); % Uniform
 X5 = X(:,5); % Uniform
+scatter(X1,X2,[],Y,'filled')
+fprintf('\nData loaded into variables. Program paused, press enter to continue\n');
+pause;
 %%
+
+figure(1); scatter(X1,Y); xlabel('X1'),ylabel('Y');
+figure(2); scatter(X2,Y); xlabel('X2'),ylabel('Y');
+figure(3); scatter(X3,Y); xlabel('X3'),ylabel('Y');
+figure(4); scatter(X4,Y); xlabel('X4'),ylabel('Y');
+figure(5); scatter(X5,Y); xlabel('X5'),ylabel('Y');
+
+
+fprintf('\nData imported. Program paused, press enter to continue\n');
+pause;
 % Compare data points against each other
-subplot(4,3,1), scatter(X1,X2,[],Y)
+figure(1); subplot(4,3,1), scatter(X1,X2,[],Y)
 xlabel('X1'),ylabel('X2');
 subplot(4,3,2), scatter(X1,X3,[],Y)
 xlabel('X1'),ylabel('X3');
@@ -35,9 +51,11 @@ xlabel('X3'),ylabel('X5');
 subplot(4,3,10), scatter(X4,X5,[],Y)
 xlabel('X4'),ylabel('X5');
 
+figure(2);scatter(X1,X2,[],Y)
+xlabel('X1'),ylabel('X2');
+scatter(X1,X2,[],Y)
 %%
 % help hist
-figure(1);
 
 subplot(3,2,1), hist(X1,100), title('X1 Distribution');
 xlabel('X1'),ylabel('Total');
@@ -63,7 +81,7 @@ sigma = std(X); % standard deviation
 for i = [1 2]
     in = (1/sqrt((2*pi)^size(x,2)*sigma(i)^2)) * exp(-((x(:,i)-mu(i)).^2)./(2 * sigma(i)^2));
     eval(['x' num2str(i) '=in;']);
-end 
+end
 
 clear data in i; % clears stated variables from workspace
 
@@ -75,22 +93,22 @@ figure(12); hist(x2,100), title('X2 Distribution');
 xlabel('X2'),ylabel('Total');
 
 %% Normalise data
-% 
+%
 % X_avg = mean(X);
 % X_std = std(X);
 % x = X;
-% 
+%
 % for i = 1:length(X(1,:))
 %     x(:,i) = X(:,i) - X_avg(i);
 %     x(:,i) = X(:,i) / X_std(i);
 % end
-% 
+%
 % X1 = x(:,1); % Gaussian
 % X2 = x(:,2); % Guassian
 % X3 = x(:,3); % Uniform
 % X4 = x(:,4); % Uniform
 % X5 = x(:,5); % Uniform
-% 
+%
 % figure(1);gplotmatrix(x,Y);
 % figure(2);gplotmatrix(X,Y);
 
@@ -114,22 +132,43 @@ c = w2 * b
 
 
 
-k = 1000;
+k = 10;
 color=1:k;
 x = featScale(X);
 
 
 [clustering,C] = kmeans(x,k);
 
-G = pdist2(C,x);
+G = pdist2(x,C);
 % % Linear
 % G = sqrt(G.^2);
 % Gaussian
 sigma = 0.03;
 G = (exp(-(G).^2)/(2*sigma^2));
-% 
-W = pinv(G')*Y;
-% 
+%
+
+%%% Calculate weights
+
+% W = pinv(G')*Y;
+
+%%% Add regularization
+lambda = 0.01
+% W = inv(G'*G + lambda*eye(size(X,2)))*G'*Y;
+%translates to
+%%
+a = (G'*Y);
+%%
+b = G*G';
+%%
+c = lambda*eye(size(X,1));
+%%
+W = a/inv(b+c);
+
+%%
+
+W = pinv(G'*G + lambda*eye(size(X,2)))*G'*Y;
+%%
+
 % input=linspace(0,1,1000);
 % output=zeros(1,length(input));
 
@@ -170,21 +209,3 @@ for i = 2:k
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end
 xlabel('x'),ylabel('y');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
