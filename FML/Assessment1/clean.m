@@ -1,12 +1,13 @@
 %% Import the data
 close all; clear; clc;
-data = csvread('data133610.csv');
+data = csvread('data164563.csv');
 % data = csvread('data163318.csv');
 
 % Separate data into Inputs and output
 X = data(:,1:(end-1));
 Y = data(:,end);
-
+% 
+% [u,v] = eig(cov(X))
 
 %% RBF Implementation
 
@@ -40,9 +41,10 @@ testOutput = weights'*G;
 % Calculate Mean Squared Errors
 m = length(Y(testS:testF));
 ETest = (1/(m))*sum((testOutput-Y(testS:testF)').^2)
-
-fprintf('\n\n\n\n\n');
-pause;
+Etest2 = meanSquaredError(testOutput,Y(testS:testF)')
+% 
+% fprintf('\n\n\n\n\n');
+% pause;
 % Plot data
 
 figure(1); scatter(x(:,1),Y,'g');
@@ -56,7 +58,7 @@ hold off;
 
 %% Cross Validation
 N = 4;
-cvpartition(Y,'k',N);
+cvpartition(Y,'k',N)
 % %
 % %
 % % P. Flach, Machine Learning: the Art and Science of
@@ -66,3 +68,12 @@ cvpartition(Y,'k',N);
 % % Learning, Chapman & Hall, 2011.
 % % � C. M. Bishop, Pattern Recognition and Machine Learning,
 % % Springer, 2007.
+
+
+y = Y
+X = X;
+
+regf=@(XTRAIN,ytrain,XTEST)(XTEST*regress(ytrain,XTRAIN));
+
+cvMse = crossval('mse',X,y,'predfun',regf)
+cvMse = 0.1015

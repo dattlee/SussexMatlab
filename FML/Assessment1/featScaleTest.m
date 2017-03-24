@@ -1,4 +1,4 @@
-function [x, X_avg, X_std] = featScale(X)
+function x = featScaleTest(X, X_avg, X_std)
 % Scales features by
 %
 % x =  x-mean(x_feature)/standardDeviation
@@ -7,8 +7,6 @@ function [x, X_avg, X_std] = featScale(X)
 %   where m is the number of training examples/data
 %   and, n is the number of features
 
-X_avg = mean(X);
-X_std = std(X);
 x = X;
 
 for i = 1:size(X,2)

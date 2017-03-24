@@ -7,17 +7,23 @@ X = data(:,1:5);
 Y = data(:,6);
 
 % e = eig(X)
-fprintf('\nData imported. Program paused, press enter to continue\n');
-pause;
+% fprintf('\nData imported. Program paused, press enter to continue\n');
+% pause;
 %% Assess Data
 X1 = X(:,1); % Gaussian
 X2 = X(:,2); % Guassian
 X3 = X(:,3); % Uniform
 X4 = X(:,4); % Uniform
 X5 = X(:,5); % Uniform
-scatter(X1,X2,[],Y,'filled')
-fprintf('\nData loaded into variables. Program paused, press enter to continue\n');
-pause;
+
+figure(1);hist(X1,10);
+figure(2);hist(X2,10);
+figure(3);hist(X3,10);
+figure(4);hist(X4,10);
+figure(5);hist(X5,10);
+
+% fprintf('\nData loaded into variables. Program paused, press enter to continue\n');
+% pause;
 %%
 
 figure(1); scatter(X1,Y); xlabel('X1'),ylabel('Y');
@@ -27,8 +33,8 @@ figure(4); scatter(X4,Y); xlabel('X4'),ylabel('Y');
 figure(5); scatter(X5,Y); xlabel('X5'),ylabel('Y');
 
 
-fprintf('\nData imported. Program paused, press enter to continue\n');
-pause;
+% fprintf('\nData imported. Program paused, press enter to continue\n');
+% pause;
 % Compare data points against each other
 figure(1); subplot(4,3,1), scatter(X1,X2,[],Y)
 xlabel('X1'),ylabel('X2');
@@ -155,16 +161,15 @@ G = (exp(-(G).^2)/(2*sigma^2));
 lambda = 0.01
 % W = inv(G'*G + lambda*eye(size(X,2)))*G'*Y;
 %translates to
-%%
+
 a = (G'*Y);
-%%
+
 b = G*G';
-%%
+
 c = lambda*eye(size(X,1));
-%%
+
 W = a/inv(b+c);
 
-%%
 
 W = pinv(G'*G + lambda*eye(size(X,2)))*G'*Y;
 %%

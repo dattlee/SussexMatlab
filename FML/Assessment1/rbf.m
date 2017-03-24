@@ -6,23 +6,16 @@ function [output, C, W] = rbf(X, Y, k, imp, sigma)
 % imp = type of rbf to perfom
 % sigma = value of sigma if using guassian implementation
 
-[clustering,C] = kmeans(X,k);
-
-% Linear
-G = pdist2(C,X); % This function determines the Euclidian Norms
 if strcmp(imp, 'Linear')
-    'linear';
+    [clustering,C] = kmeans(X,k);
+    G = pdist2(C,X);
 elseif strcmp(imp, 'Gaussian')
     % Gaussian
+    [clustering,C] = kmeans(X,k);
+    G = pdist2(C,X);
     G = (exp(-(G).^2)/(2*sigma^2));
+elseif strcmp(imp, 'Regularized')
 
-elseif strcmp(imp, 'Multiquadratic')
-    % Multiquadratic
-    %G = (exp(-(G).^2)/(2*sigma^2));
-
-elseif  strcmp(imp, 'InverseMultiquadratic')
-    % Inverse Multiquadratic
-    %G = (exp(-(G).^2)/(2*sigma^2));
 end
 
 
