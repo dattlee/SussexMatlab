@@ -1,0 +1,1 @@
+max(max(pdist2(best_centers,best_centers')))/sqrt(2*length(best_centers))

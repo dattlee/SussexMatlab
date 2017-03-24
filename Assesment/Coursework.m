@@ -42,39 +42,41 @@ Y = data(:,end);
 % test_error = reg_meanSquaredError(y_test,test_predictions,lambda,mdl_weights)
 
 %% 5 fold Cross validation
-lambda = 0.1; % used by regularization
-sigma = 0; % used by gaussian
-[five_fold_error, training_error, best_avg, best_std, best_centers, best_weights] = crossValidation5(X,Y,lambda,sigma);
-five_fold_error
-training_error
-%%
-% 
-% figure(1);scatter(x_test(:,1),test_predictions);
-% figure(2);scatter(x_test(:,1),y_test);
-% figure(3);scatter(x_test(:,1),test_predictions)
+% lambda = 0.1; % used by regularization
+% sigma = 0; % used by gaussian
+% [five_fold_error, training_error, best_avg, best_std, best_centers, best_weights] = crossValidation5(X,Y,lambda,sigma);
+% five_fold_error
+% training_error
 
-%% Predictions
-
-
-% testdata = csvread('testdata.csv');
-
-
-%%
-% 
-% 
-% a = linspace(1,1000,1000);
-% b = X(:,2);
-% c = Y;
-% scatter3(a,b,c);
-% xlabel('it');
-% ylabel('x1');
-% zlabel('output');
+%% Best Lambda
+lambda = 30; % used by regularization
+best_training_error = 1000;
+best_lambda = 30;
+for i = 1:30
+    [five_fold_error, training_error, best_avg, best_std, best_centers, best_weights] = crossValidation5(X,Y,lambda,sigma);
+    if five_fold_error < best_training_error
+        best_training_error = five_fold_error;
+        best_lambda = lambda;
+    end
+    lambda = lambda / 3;
+end
+parameters = struct('best_lambda',best_lambda, 'best_avg', best_avg, 'best_std',best_std,...
+            'best_centers',best_centers, 'best_weights',best_weights);
+        
+save('parameters.mat','parameters');
 %% Luke Test
-lambda = 10; % used by regularization
-sigma = 0;
+%testdata = csvread('testdata.csv');
+
+parameters = struct('best_lambda',best_lambda, 'best_avg', best_avg, 'best_std',best_std,...
+            'best_centers',best_centers, 'best_weights',best_weights);
+
+% X = testdata;
+best_avg = parameters.best_avg;
+best_std = parameters.best_std;
+best_centers = parameters.best_centers;
+best_weights = parameters.best_weights;
+sigma = 0; % unused parameter
 
 % Error in the test
-test_predictions = mdl_reg(X, best_avg, best_std, best_centers, best_weights,sigma);
-test_error = reg_meanSquaredError(Y,test_predictions,lambda,best_weights)
+luke_predictions = mdl_reg(X, best_avg, best_std, best_centers, best_weights,sigma);
 
-scatter(X(:,2),test_predictions)
