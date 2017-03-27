@@ -74,8 +74,11 @@ pause;
 fprintf('\nTraining One-vs-All Logistic Regression...\n')
 
 lambda = 0.1;
+%size(X) % 5000*400
+%a = oneVsAll(X, y, num_labels, lambda)
 [all_theta] = oneVsAll(X, y, num_labels, lambda);
-
+size(all_theta)
+size(X)
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 

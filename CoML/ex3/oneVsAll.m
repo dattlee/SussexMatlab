@@ -12,7 +12,7 @@ m = size(X, 1);
 n = size(X, 2);
 
 % You need to return the following variables correctly
-all_theta = zeros(num_labels, n + 1);
+all_theta = zeros(num_labels, n + 1); % 10*401
 
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
@@ -55,13 +55,14 @@ X = [ones(m, 1) X];
 
 %  Set options for fminunc
 options = optimset('GradObj', 'on', 'MaxIter', 50);
-
+num_labels = 1:(num_labels)
 %  Run fminunc to obtain the optimal theta
 %  This function will return theta and the cost
-for i = 1:n
+for i = num_labels
   [all_theta(i,:)] = fmincg(...
       @(t)(lrCostFunction(t, X, (y==num_labels(i)), lambda)), ...
-      all_theta(i,:), options);
+      all_theta(i,:)', options);
+      %size(all_theta(i,:))
 end
 
 
